@@ -1,5 +1,6 @@
 from PolynomialRegression import pol_regression, polyMatrix, eval_pol_regression
-from kMeans import compute_euclidean_distance, initialise_centroids, kmeans
+from kMeans import kmeans
+from HIVAnalysis import summary, normalise, plot, ANN, randomForest
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -13,9 +14,9 @@ def cleanDataFrame(df):
     return df
 
 
-def splitDataFrame(df):
+def splitDataFrame(df, testSize, shuffleBool):
     # Split the data into a train test split
-    train, test = train_test_split(df, test_size=0.2, shuffle=False)
+    train, test = train_test_split(df, test_size=testSize, shuffle=shuffleBool)
     return train, test
 
 
@@ -28,7 +29,7 @@ def runPolynomialRegression():
     y = pol['y']
 
     # Split into test and train for each dimension
-    train, test = splitDataFrame(pol)
+    train, test = splitDataFrame(pol, 0.2, False)
 
     x_train = train['x'].to_numpy()
     y_train = train['y'].to_numpy()
@@ -142,6 +143,43 @@ def runKmeansClustering():
     plt.show()
 
 
+def runHivAnalysis():
+    hiv = pd.read_csv('datasets/Task3 - dataset - HIV RVG.csv')
+    hiv = cleanDataFrame(hiv)  # Remove duplicate and null values
+
+    summary(hiv)  # Print a summary of the dataset
+
+    hivNormalised = normalise(hiv)  # Normalise the dataset
+    plot(hivNormalised)
+
+    train, test = splitDataFrame(hivNormalised, 0.1, True)  # Split the data into 90% training and 10% testing, shuffled
+
+    acuracy, plt = ANN(train, test, showPlot=True)  # Run an artificial neural network with 500 neurons in each hidden layer
+    plt.show()
+    print("Accuracy of Random Forest Classifier with 1000 trees and 5 samples per node: {}".format(randomForest(train, test)))  # Run a random forest classifier with 1000 trees and 5 samples per node
+    print("Accuracy of Random Forest Classifier with 1000 trees and 10 samples per node: {}".format(randomForest(train, test, numSamples=10)))  # Run a random forest classifier with 1000 trees and 10 samples per node
+
+    splits = []
+
+    for i in range(10):
+        splits.append(hivNormalised.sample(frac=0.1))
+
+    variations = [50, 500, 1000]
+    accuracyANN = []
+    accuracyRFC = []
+
+    for value in variations:
+        for split in splits:
+            train, test = splitDataFrame(split, 0.1, True)
+            accuracyANN.append(ANN(train, test, value)[0])
+            accuracyRFC.append(randomForest(train, test, value, 10))
+        meanAccuracyANN = sum(accuracyANN)/len(accuracyANN)
+        meanAccuracyRFC = sum(accuracyRFC) / len(accuracyRFC)
+        print("Mean accuracy of ANN with {} neurons and 10 folds is {}".format(value, meanAccuracyANN))
+        print("Mean accuracy of RFC with {} trees and 10 folds is {}".format(value, meanAccuracyRFC))
+
+
 if __name__ == "__main__":
     # runPolynomialRegression()  # Run polynomial regression task
-    runKmeansClustering()  # Run k-means clustering task
+    # runKmeansClustering()  # Run k-means clustering task
+    runHivAnalysis()
