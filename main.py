@@ -29,7 +29,7 @@ def runPolynomialRegression():
     y = pol['y']
 
     # Split into test and train for each dimension
-    train, test = splitDataFrame(pol, 0.2, False)
+    train, test = splitDataFrame(pol, 0.3, False)
 
     x_train = train['x'].to_numpy()
     y_train = train['y'].to_numpy()
@@ -39,8 +39,8 @@ def runPolynomialRegression():
     # PLot the test data in green, and the train data in blue
     plt.figure()
     plt.title("Polynomial Regression")
-    plt.plot(x_test, y_test, 'go')
-    plt.plot(x_train, y_train, 'bo')
+    plt.plot(x_train, y_train, 'go')
+    plt.plot(x_test, y_test, 'bo')
 
     # For each given degree, train the model, then plot the result of testing on x
     w0 = pol_regression(x, y, 0)
@@ -73,6 +73,8 @@ def runPolynomialRegression():
     ytest10 = Xtest10.dot(w10)
     plt.plot(x, ytest10, 'c--')
 
+    plt.legend(('training points', 'ground truth', '$x0$', '$x^1$', '$x^2$', '$x^3$', '$x^6$', '$X^10$'), loc='lower right')
+    plt.xlim([-5, 5])
     plt.show()
 
     plt.figure()
@@ -84,18 +86,20 @@ def runPolynomialRegression():
     trainError = []
     testError = []
 
-    for degree in [x for x in range(11) if x in degrees]:
+    for degree in degrees:
         w = pol_regression(x_train, y_train, degree)
         error = eval_pol_regression(w, x_train, y_train, degree)
         trainError.append(error)
 
-    for degree in [x for x in range(11) if x in degrees]:
+    for degree in degrees:
         w = pol_regression(x_test, y_test, degree)
         error = eval_pol_regression(w, x_test, y_test, degree)
         testError.append(error)
 
     plt.plot(trainError, 'g')
     plt.plot(testError, 'r')
+    plt.legend(('training error', 'test error'),
+               loc='upper right')
     plt.show()
 
 
@@ -181,5 +185,5 @@ def runHivAnalysis():
 
 if __name__ == "__main__":
     # runPolynomialRegression()  # Run polynomial regression task
-    # runKmeansClustering()  # Run k-means clustering task
-    runHivAnalysis()
+    runKmeansClustering()  # Run k-means clustering task
+    # runHivAnalysis()
