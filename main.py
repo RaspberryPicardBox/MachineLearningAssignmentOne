@@ -117,7 +117,7 @@ def runKmeansClustering():
     # For k=2 - height x and tail length y
     plt.scatter(cluster_assignedk2[:, 0], cluster_assignedk2[:, 1], c=cluster_assignedk2[:, 4], s=10)  # Plot the values with the cluster value as colour
     plt.scatter(centroidsk2[:, 0], centroidsk2[:, 1], marker='*', s=200)  # Plot the centroid values
-    plt.title("Dog Breeds - Height and Tail")
+    plt.title("Dog Breeds - Height and Tail k=2")
     plt.xlabel("Height")
     plt.ylabel("Tail Length")
     plt.show()
@@ -125,7 +125,7 @@ def runKmeansClustering():
     # For k=3 - height x and tail length y
     plt.scatter(cluster_assignedk3[:, 0], cluster_assignedk3[:, 1], c=cluster_assignedk3[:, 4], s=10)
     plt.scatter(centroidsk3[:, 0], centroidsk3[:, 1], marker='*', s=200)
-    plt.title("Dog Breeds - Height and Tail")
+    plt.title("Dog Breeds - Height and Tail k=3")
     plt.xlabel("Height")
     plt.ylabel("Tail Length")
     plt.show()
@@ -133,7 +133,7 @@ def runKmeansClustering():
     # For k=2 - height x and leg length y
     plt.scatter(cluster_assignedk2[:, 0], cluster_assignedk2[:, 2], c=cluster_assignedk2[:, 4], s=10)
     plt.scatter(centroidsk2[:, 0], centroidsk2[:, 2], marker='*', s=200)
-    plt.title("Dog Breeds - Height and Leg")
+    plt.title("Dog Breeds - Height and Leg k=2")
     plt.xlabel("Height")
     plt.ylabel("Leg Length")
     plt.show()
@@ -141,7 +141,7 @@ def runKmeansClustering():
     # For k=3 - height x and leg length y
     plt.scatter(cluster_assignedk3[:, 0], cluster_assignedk3[:, 2], c=cluster_assignedk3[:, 4], s=10)
     plt.scatter(centroidsk3[:, 0], centroidsk3[:, 2], marker='*', s=200)
-    plt.title("Dog Breeds - Height and Leg")
+    plt.title("Dog Breeds - Height and Leg k=3")
     plt.xlabel("Height")
     plt.ylabel("Leg Length")
     plt.show()
