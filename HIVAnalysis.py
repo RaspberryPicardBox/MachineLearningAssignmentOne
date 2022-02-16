@@ -73,7 +73,7 @@ def ANN(train, test, numNeurons=500, showPlot=False):
 
 
 def randomForest(train, test, numTrees=1000, numSamples=5):
-    # Fit a multi-layer ANN classifier and predict values of participant condition for test set
+    # Fit a random forest classifier and predict values of participant condition for test set
 
     lEnc = preprocessing.LabelEncoder()  # Preprocess the label as encoded int
     lEnc.fit(['Patient', 'Control'])
