@@ -69,7 +69,7 @@ def ANN(train, test, numNeurons=500, showPlot=False):
     plt.plot(num_epochs, accuracies)
     plt.title("ANN with {} Neurons".format(numNeurons))
     plt.xlabel("Epochs")
-    plt.ylabel("Loss")
+    plt.ylabel("Accuracy")
     return accuracy, plt
 
 

@@ -185,5 +185,5 @@ def runHivAnalysis():
 
 if __name__ == "__main__":
     # runPolynomialRegression()  # Run polynomial regression task
-    runKmeansClustering()  # Run k-means clustering task
-    # runHivAnalysis()
+    # runKmeansClustering()  # Run k-means clustering task
+    runHivAnalysis()
