@@ -52,7 +52,7 @@ def ANN(train, test, numNeurons=500, showPlot=False):
     y_test = lEnc.transform(test['Participant Condition'])
     X_test = test.drop('Participant Condition', axis=1)  # Remove the labels from the test set
 
-    clf = neural_network.MLPClassifier(hidden_layer_sizes=(numNeurons, numNeurons), activation='logistic')
+    clf = neural_network.MLPClassifier(hidden_layer_sizes=(numNeurons, numNeurons), activation='relu')
     clf.fit(X_train, y_train)
 
     num_epochs = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 1000]

@@ -156,12 +156,12 @@ def runHivAnalysis():
     hivNormalised = normalise(hiv)  # Normalise the dataset
     plot(hivNormalised)
 
-    #train1, test1 = splitDataFrame(hivNormalised, 0.1, False)  # Split the data into 90% training and 10% testing, shuffled
+    train1, test1 = splitDataFrame(hivNormalised, 0.1, False)  # Split the data into 90% training and 10% testing, shuffled
 
-    #acuracy, plt = ANN(train1, test1, showPlot=True)  # Run an artificial neural network with 500 neurons in each hidden layer
-    #plt.show()
-    #print("Accuracy of Random Forest Classifier with 1000 trees and 5 samples per node: {}".format(randomForest(train1, test1)))  # Run a random forest classifier with 1000 trees and 5 samples per node
-    #print("Accuracy of Random Forest Classifier with 1000 trees and 10 samples per node: {}".format(randomForest(train1, test1, numSamples=10)))  # Run a random forest classifier with 1000 trees and 10 samples per node
+    acuracy, plt = ANN(train1, test1, showPlot=True)  # Run an artificial neural network with 500 neurons in each hidden layer
+    plt.show()
+    print("Accuracy of Random Forest Classifier with 1000 trees and 5 samples per node: {}".format(randomForest(train1, test1)))  # Run a random forest classifier with 1000 trees and 5 samples per node
+    print("Accuracy of Random Forest Classifier with 1000 trees and 10 samples per node: {}".format(randomForest(train1, test1, numSamples=10)))  # Run a random forest classifier with 1000 trees and 10 samples per node
 
     splits = []
 
@@ -184,6 +184,6 @@ def runHivAnalysis():
 
 
 if __name__ == "__main__":
-    # runPolynomialRegression()  # Run polynomial regression task
-    # runKmeansClustering()  # Run k-means clustering task
+    runPolynomialRegression()  # Run polynomial regression task
+    runKmeansClustering()  # Run k-means clustering task
     runHivAnalysis()
