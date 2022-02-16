@@ -57,19 +57,18 @@ def ANN(train, test, numNeurons=500, showPlot=False):
 
     num_epochs = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 1000]
     accuracies = []
-    if showPlot:
+    if showPlot == True:
         for max_epoch in num_epochs:
             clf = neural_network.MLPClassifier(hidden_layer_sizes=(numNeurons, numNeurons), activation='logistic', max_iter=max_epoch)
             warnings.filterwarnings("ignore", category=ConvergenceWarning, module="sklearn")
             clf.fit(X_train, y_train)
             accuracies.append(clf.score(X_test, y_test))
-
+        plt.plot(num_epochs, accuracies)
+        plt.title("ANN with {} Neurons".format(numNeurons))
+        plt.xlabel("Epochs")
+        plt.ylabel("Accuracy")
 
     accuracy = clf.score(X_test, y_test)
-    plt.plot(num_epochs, accuracies)
-    plt.title("ANN with {} Neurons".format(numNeurons))
-    plt.xlabel("Epochs")
-    plt.ylabel("Accuracy")
     return accuracy, plt
 
 

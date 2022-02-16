@@ -156,12 +156,12 @@ def runHivAnalysis():
     hivNormalised = normalise(hiv)  # Normalise the dataset
     plot(hivNormalised)
 
-    train, test = splitDataFrame(hivNormalised, 0.1, True)  # Split the data into 90% training and 10% testing, shuffled
+    #train, test = splitDataFrame(hivNormalised, 0.1, False)  # Split the data into 90% training and 10% testing, shuffled
 
-    acuracy, plt = ANN(train, test, showPlot=True)  # Run an artificial neural network with 500 neurons in each hidden layer
-    plt.show()
-    print("Accuracy of Random Forest Classifier with 1000 trees and 5 samples per node: {}".format(randomForest(train, test)))  # Run a random forest classifier with 1000 trees and 5 samples per node
-    print("Accuracy of Random Forest Classifier with 1000 trees and 10 samples per node: {}".format(randomForest(train, test, numSamples=10)))  # Run a random forest classifier with 1000 trees and 10 samples per node
+    #acuracy, plt = ANN(train, test, showPlot=True)  # Run an artificial neural network with 500 neurons in each hidden layer
+    #plt.show()
+    #print("Accuracy of Random Forest Classifier with 1000 trees and 5 samples per node: {}".format(randomForest(train, test)))  # Run a random forest classifier with 1000 trees and 5 samples per node
+    #print("Accuracy of Random Forest Classifier with 1000 trees and 10 samples per node: {}".format(randomForest(train, test, numSamples=10)))  # Run a random forest classifier with 1000 trees and 10 samples per node
 
     splits = []
 
@@ -175,6 +175,8 @@ def runHivAnalysis():
     for value in variations:
         for split in splits:
             train, test = splitDataFrame(split, 0.1, True)
+            print(train)
+            print(test)
             accuracyANN.append(ANN(train, test, value)[0])
             accuracyRFC.append(randomForest(train, test, value, 10))
         meanAccuracyANN = sum(accuracyANN)/len(accuracyANN)
